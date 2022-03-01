@@ -5,11 +5,14 @@ Websocket API provides non-blocking cb interface based on tarantool fibers.
 
 #
 ## Installation
+Require net-url, websocket for tarantool
 ```bash 
  tarantoolctl rocks install https://raw.githubusercontent.com/golgote/neturl/master/rockspec/net-url-1.1-1.rockspec
+ tarantoolctl rocks install https://github.com/tarantool/websocket/raw/master/websocket-scm-1.rockspec
  tarantoolctl rocks install https://raw.githubusercontent.com/r3l0c/lua-bitfinex/master/lua-bitfinex-scm-1.rockspec
-
+ 
 ```
+
 ```lua
 local json = require 'json'
 local bfx = require ("lua-bitfinex"):new(APIKEY, APISECRET)
