@@ -14,7 +14,6 @@ Public REST: full support, WebSocket full support.
 }
 dependencies = {
    "lua >= 5.1",
-   "https://raw.githubusercontent.com/golgote/neturl/master/rockspec/net-url-1.1-1.rockspec",
    "websocket = scm-1",
 }
 build = {

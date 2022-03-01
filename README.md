@@ -3,6 +3,13 @@
 This Lua library provides a public rest, public websocket and auth websocket api.
 Websocket API provides non-blocking cb interface based on tarantool fibers.
 
+#
+## Installation
+```bash 
+ tarantoolctl rocks install https://raw.githubusercontent.com/golgote/neturl/master/rockspec/net-url-1.1-1.rockspec
+ tarantoolctl rocks install https://raw.githubusercontent.com/r3l0c/lua-bitfinex/master/lua-bitfinex-scm-1.rockspec
+
+```
 ```lua
 local json = require 'json'
 local bfx = require ("lua-bitfinex"):new(APIKEY, APISECRET)
@@ -198,4 +205,9 @@ bfx:wsCalc({{'margin_sym_tETHUSD'}})
 ## Bitfinex:wsCalc
  Send calc requests to trigger specific calculations.
  https://docs.bitfinex.com/reference#ws-auth-input-calc
+
+#
+## На свободное время ;)
+## ERC-20 network 0xbc7d2c2fe40f9d8b78f79eaa7dedc3bae375d001
+## NANO nano_3gus81iswuaefexdbximtm7xb89n4kdmdnga3yqne4xuw7igpnroobcw4x1c
 
