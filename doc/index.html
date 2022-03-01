@@ -1,0 +1,1167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Bitfinex API for Lua</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-bitfinex</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>Bitfinex</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>Bitfinex</code></h1>
+<p>Bitfinex API.</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Status">Status ()</a></td>
+	<td class="summary">Bitfinex:Status Get the current status of the platform, “Operative” or “Maintenance”.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Candles">Candles (timeframe, symbol, section, period, limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:Candles.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Tickers">Tickers (symbols)</a></td>
+	<td class="summary">Bitfinex:Tickers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ticker">Ticker (symbol)</a></td>
+	<td class="summary">Bitfinex:Ticker.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#TickersHist">TickersHist (symbols, limit_, start_, end_)</a></td>
+	<td class="summary">Bitfinex:TickersHist.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Trades">Trades (symbol, limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:Trades.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Book">Book (symbol, precision, len)</a></td>
+	<td class="summary">Bitfinex:Book.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Stats">Stats (symbol, key, size, side, section, limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:Stats.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Configs">Configs (query)</a></td>
+	<td class="summary">Bitfinex:Configs.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DerivativesStatus">DerivativesStatus (s_pairs)</a></td>
+	<td class="summary">Bitfinex:DerivativesStatus.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DerivativesStatusHistory">DerivativesStatusHistory (symbol, limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:DerivativesStatusHistory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Liquidations">Liquidations (limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:Liquidations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Leaderboards">Leaderboards (key_, timeframe, symbol, section, limit_, start_, end_, sort_)</a></td>
+	<td class="summary">Bitfinex:Leaderboards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PulseHistory">PulseHistory (limit_, end_)</a></td>
+	<td class="summary">Bitfinex:PulseHistory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#PulseProfileDetails">PulseProfileDetails (nickname)</a></td>
+	<td class="summary">Bitfinex:PulseProfileDetails.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FundingStats">FundingStats (symbol, limit_, start_, end_)</a></td>
+	<td class="summary">Bitfinex:FundingStats.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#MarketAveragePrice">MarketAveragePrice (symbol, amount, period, rate_limit)</a></td>
+	<td class="summary">Bitfinex:MarketAveragePrice.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ForeignExchangeRate">ForeignExchangeRate (ccy1, ccy2)</a></td>
+	<td class="summary">Bitfinex:ForeignExchangeRate.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsTicker">wsTicker (symbol, callback)</a></td>
+	<td class="summary">Bitfinex:wsTicker.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsTrades">wsTrades (symbol, callback)</a></td>
+	<td class="summary">Bitfinex:wsTrades.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsBooks">wsBooks (symbol, precision, frequency, length, subid, callback)</a></td>
+	<td class="summary">Bitfinex:wsBooks.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsCandles">wsCandles (symbol, timeframe, aaggr, pper_start, pend, callback)</a></td>
+	<td class="summary">Bitfinex:wsCandles.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsStatus">wsStatus (key, callback)</a></td>
+	<td class="summary">Bitfinex:wsStatus Subscribe to and receive different types of platform information - currently supports derivatives pair status and liquidation feed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsNewOrder">wsNewOrder (gid, cid, type_, symbol, amount, price, lev, price_trailing, price_aux_limit, price_oco_stop, flags, tif, meta)</a></td>
+	<td class="summary">Bitfinex:wsNewOrder Creates a new order, can be used to create margin, exchange, and derivative orders.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsUpdateOrder">wsUpdateOrder (id, gid, cid, cid_date, amount, price, lev, delta, price_trailing, price_aux_limit, flags, tif)</a></td>
+	<td class="summary">Bitfinex:wsUpdateOrder Update an existing order, can be used to update margin, exchange, and derivative orders.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsNewOrderMultiOp">wsNewOrderMultiOp (op)</a></td>
+	<td class="summary">Bitfinex:wsNewOrderMultiOp Send multiple order-related operations.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsCancelOrder">wsCancelOrder (id, cid, cid_date)</a></td>
+	<td class="summary">Bitfinex:wsCancelOrder To cancel an order, construct a payload using the ‘oc’ (order cancel) abbreviation.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsCancelOrderMulti">wsCancelOrderMulti (payload)</a></td>
+	<td class="summary">Bitfinex:wsCancelOrderMulti The Cancel Order Multi command allows sending of multiple order cancellation operations at the same time.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsNewOffer">wsNewOffer (type_, symbol, amount, rate, period, flags)</a></td>
+	<td class="summary">Bitfinex:wsNewOffer Create a new funding offer.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsCancelOffer">wsCancelOffer (id)</a></td>
+	<td class="summary">Bitfinex:wsCancelOffer Cancel a funding offer.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#wsCalc">wsCalc (req)</a></td>
+	<td class="summary">Bitfinex:wsCalc Send calc requests to trigger specific calculations.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Status"></a>
+    <strong>Status ()</strong>
+    </dt>
+    <dd>
+    Bitfinex:Status Get the current status of the platform, “Operative” or “Maintenance”. Maintenance periods generally last for a few minutes to a couple of hours and may be necessary from time to time during infrastructure upgrades.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table {OPERATIVE = 1} or {OPERATIVE = 0}. 1=operative, 0=maintenance
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Candles"></a>
+    <strong>Candles (timeframe, symbol, section, period, limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Candles. The Candles endpoint provides OCHL (Open, Close, High, Low) and volume data for the specified funding currency or trading pair. The endpoint provides the last 100 candles by default, but a limit and a start and/or end timestamp can be specified.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">timeframe</span>
+        string. Available values: ‘1m’, ‘5m’, ‘15m’, ‘30m’, ‘1h’, ‘3h’, ‘6h’, ‘12h’, ‘1D’, ‘1W’, ‘14D’, ‘1M’
+        </li>
+        <li><span class="parameter">symbol</span>
+        string. The symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
+        </li>
+        <li><span class="parameter">section</span>
+        string. Available values: ‘last’, ‘hist’
+        </li>
+        <li><span class="parameter">period</span>
+        string. Funding period. Only required for funding candles. eg p30.
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of candles requested (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table. [[MTS, OPEN, CLOSE, HIGH, LOW, VOLUME], …]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Tickers"></a>
+    <strong>Tickers (symbols)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Tickers. The Bitfinex.Tickers provides a high level overview of the state of the market. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day. The endpoint can retrieve multiple tickers with a single query.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbols</span>
+        a table of symbols you want information about. nil, {‘ALL’}, {‘tBTCUSD’, ‘tLTCUSD’}…
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ticker"></a>
+    <strong>Ticker (symbol)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Ticker. The ticker endpoint provides a high level overview of the state of the market for a specified pair. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. {‘tBTCUSD’}, {‘fUSD’}…
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "TickersHist"></a>
+    <strong>TickersHist (symbols, limit_, start_, end_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:TickersHist. History of recent trading tickers. Provides historic data of the best bid and ask at a 10-second interval. Historic data goes back 1 year. The oldest results have a 30-minute interval.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbols</span>
+        string. , {‘tBTCUSD’,‘tETHUSD’}…
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max 250)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Trades"></a>
+    <strong>Trades (symbol, limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Trades. The trades endpoint allows the retrieval of past public trades and includes details such as price, size, and time. Optional parameters can be used to limit the number of results; you can specify a start and end timestamp, a limit, and a sorting method.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. , {‘tBTCUSD’} or tBTCUSD…
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Book"></a>
+    <strong>Book (symbol, precision, len)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Book. The Public Books endpoint allows you to keep track of the state of Bitfinex order books on a price aggregated basis with customizable precision. Raw books can be retrieved by using precision R0. https://docs.bitfinex.com/reference#rest-public-book
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        a string of the symbol you want information about. (e.g. tBTCUSD, tETHUSD, fUSD, fBTC)
+        </li>
+        <li><span class="parameter">precision</span>
+        Level of price aggregation (P0, P1, P2, P3, P4, R0). Bitfinex.Precision.P0 …
+        </li>
+        <li><span class="parameter">len</span>
+        number of price points (‘1’, ‘25’, ‘100’)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Stats"></a>
+    <strong>Stats (symbol, key, size, side, section, limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Stats. The Bitfinex.Stats The Stats endpoint provides various statistics on a specified trading pair or funding currency. Use the available keys to specify which statistic you wish to retrieve. Please note that the ‘Side’ path param is only required for the pos.size key. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day. The endpoint can retrieve multiple tickers with a single query.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        a array of symbols you want information about. Trading/Funding only: {‘tBTCUSD’} or {‘fUSD’} or {‘BFX’}(vol.1d / vol.7d / vol.30d keys) etc, Funding and trading: {‘fUSD’,‘tBTCUSD’} …
+        </li>
+        <li><span class="parameter">key</span>
+        a string of Bitfinex.StatsKeys. Allowed values: ‘funding.size’, ‘credits.size’, ‘credits.size.sym’, ‘pos.size’, ‘vol.1d’, ‘vol.7d’, ‘vol.30d’, ‘vwap’
+        </li>
+        <li><span class="parameter">size</span>
+        string. Available values: ‘1m’ (for keys: ‘pos.size’, ‘funding.size’, ‘credits.size’, ‘credits.size.sym’), ‘30m’ (for keys: vol.1d, vol.7d, vol.30d), ‘1d’ (for keys: vwap)
+        </li>
+        <li><span class="parameter">side</span>
+        string. Only used for ‘pos.size’ key. Available values: ‘long’, ‘short’. Only for non-funding queries.
+        </li>
+        <li><span class="parameter">section</span>
+        , string. Available values: ‘last’, ‘hist’
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table of various statistics on a specified trading pair or funding currency.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Configs"></a>
+    <strong>Configs (query)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Configs. Fetch currency and symbol site configuration data. https://docs.bitfinex.com/reference#rest-public-conf A variety of types of config data can be fetched by constructing a path with an Action, Object, and conditionally a Detail value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">query</span>
+        string. Bitfinex.ConfigsPub
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DerivativesStatus"></a>
+    <strong>DerivativesStatus (s_pairs)</strong>
+    </dt>
+    <dd>
+    Bitfinex:DerivativesStatus. Endpoint used to receive different types of platform information - currently supports derivatives pair status only.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">s_pairs</span>
+        string|table. The key or keys (Separate by commas) of the pairs to fetch status information. To fetch information for all pairs use the key value ‘ALL’
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "DerivativesStatusHistory"></a>
+    <strong>DerivativesStatusHistory (symbol, limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:DerivativesStatusHistory. Endpoint used to receive different types of historical platform information - currently supports derivatives pair status only.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string|table. The symbol you want information about. (e.g. tBTCF0:USTF0 tETHF0:USTF0, {‘tBTCF0:USTF0’} etc.)
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Liquidations"></a>
+    <strong>Liquidations (limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Liquidations. Endpoint to retrieve liquidations. By default it will retrieve the most recent liquidations, but time-specific data can be retrieved using timestamps.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Leaderboards"></a>
+    <strong>Leaderboards (key_, timeframe, symbol, section, limit_, start_, end_, sort_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:Leaderboards. The leaderboards endpoint allows you to retrieve leaderboard standings for unrealized profit (period delta), unrealized profit (inception), volume, and realized profit.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key_</span>
+        string. Bitfinex.Leaderboards.key. Allowed values: ‘plu_diff’ for unrealized profit (period delta); ‘plu’ for unrealized profit (inception); ‘vol’ for volume; ‘plr’ for realized profit
+        </li>
+        <li><span class="parameter">timeframe</span>
+        string. Bitfinex.Leaderboards.timeframe. Available values: ‘3h’, ‘1w’, ‘1M’ - see table below for available time frames per key
+        </li>
+        <li><span class="parameter">symbol</span>
+        string. The symbol you want information about. (e.g. tBTCUSD, tETHUSD, tGLOBAL:USD) - see table below for available symbols per key
+        </li>
+        <li><span class="parameter">section</span>
+        string. Available values: ‘hist’
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 10000)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+        <li><span class="parameter">sort_</span>
+        number. if = 1 it sorts results returned with old &gt; new
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PulseHistory"></a>
+    <strong>PulseHistory (limit_, end_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:PulseHistory. View the latest pulse messages. You can specify an end timestamp to view older messages.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 100)
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "PulseProfileDetails"></a>
+    <strong>PulseProfileDetails (nickname)</strong>
+    </dt>
+    <dd>
+    Bitfinex:PulseProfileDetails. This endpoint shows details for a specific Pulse profile
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">nickname</span>
+        string. Pulse user nickname (case sensitive)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "FundingStats"></a>
+    <strong>FundingStats (symbol, limit_, start_, end_)</strong>
+    </dt>
+    <dd>
+    Bitfinex:FundingStats. Get a list of the most recent funding data for the given currency: FRR, average period, total amount provided, total amount used
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string.The symbol you want information about. (e.g. fUSD, fBTC, fETH …)
+        </li>
+        <li><span class="parameter">limit_</span>
+        number. Number of records (Max: 100)
+        </li>
+        <li><span class="parameter">start_</span>
+        number. Millisecond start time
+        </li>
+        <li><span class="parameter">end_</span>
+        number. Millisecond end time
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [[],[],…]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "MarketAveragePrice"></a>
+    <strong>MarketAveragePrice (symbol, amount, period, rate_limit)</strong>
+    </dt>
+    <dd>
+    Bitfinex:MarketAveragePrice. Calculate the average execution price for Trading or rate for Margin funding.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. The symbol you want information about.
+        </li>
+        <li><span class="parameter">amount</span>
+        string. Amount. Positive for buy, negative for sell (ex. ‘1.123’)
+        </li>
+        <li><span class="parameter">period</span>
+        number. (optional) Maximum period for Margin Funding
+        </li>
+        <li><span class="parameter">rate_limit</span>
+        string. Limit rate/price (ex. ‘1000.5’)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table [PRICE_AVG, AMOUNT], funding [RATE_AVG, AMOUNT]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "ForeignExchangeRate"></a>
+    <strong>ForeignExchangeRate (ccy1, ccy2)</strong>
+    </dt>
+    <dd>
+    Bitfinex:ForeignExchangeRate. Calculate the exchange rate between two currencies
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">ccy1</span>
+        string|table. First currency (base currency) or key-value table eg {ccy1 = ‘BTC’,ccy2 = ‘USD’}, or {‘BTC’,‘USD’}
+        </li>
+        <li><span class="parameter">ccy2</span>
+        string. Second currency (quote currency). nil, if ccy1 is k-v table.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        table key-value [ CURRENT_RATE]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsTicker"></a>
+    <strong>wsTicker (symbol, callback)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsTicker. The ticker endpoint provides a high level overview of the state of the market for a specified pair. It shows the current best bid and ask, the last traded price, as well as information on the daily volume and price movement over the last day.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. Trading pair or funding currency
+        </li>
+        <li><span class="parameter">callback</span>
+        function. Callback function for trades channel messages
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsTrades"></a>
+    <strong>wsTrades (symbol, callback)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsTrades. This channel sends a trade message whenever a trade occurs at Bitfinex. It includes all the pertinent details of the trade, such as price, size and the time of execution. The channel can send funding trade data as well.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. Trading pair or funding currency
+        </li>
+        <li><span class="parameter">callback</span>
+        function. Callback function for trades channel messages
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsBooks"></a>
+    <strong>wsBooks (symbol, precision, frequency, length, subid, callback)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsBooks. The Order Books channel allows you to keep track of the state of the Bitfinex order book. It is provided on a price aggregated basis with customizable precision. Upon connecting, you will receive a snapshot of the book
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. Trading pair or funding currency
+        </li>
+        <li><span class="parameter">precision</span>
+        string. Level of price aggregation (P0, P1, P2, P3, P4). The default is P0
+        </li>
+        <li><span class="parameter">frequency</span>
+        string. Frequency of updates (F0, F1). F0=realtime / F1=2sec. The default is F0.
+        </li>
+        <li><span class="parameter">length</span>
+        string. Number of price points (“1”, “25”, “100”, “250”) [default=“25”]
+        </li>
+        <li><span class="parameter">subid</span>
+        string. Optional user-defined ID for the subscription
+        </li>
+        <li><span class="parameter">callback</span>
+        function. Callback function for trades channel messages
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsCandles"></a>
+    <strong>wsCandles (symbol, timeframe, aaggr, pper_start, pend, callback)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsCandles. The Candles endpoint provides OCHL (Open, Close, High, Low) and volume data for the specified trading pair.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">symbol</span>
+        string. Trading pair or funding currency
+        </li>
+        <li><span class="parameter">timeframe</span>
+        string.
+        </li>
+        <li><span class="parameter">aaggr</span>
+        string.
+        </li>
+        <li><span class="parameter">pper_start</span>
+        string.
+        </li>
+        <li><span class="parameter">pend</span>
+        string.
+        </li>
+        <li><span class="parameter">callback</span>
+        function. Callback function for trades channel messages
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsStatus"></a>
+    <strong>wsStatus (key, callback)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsStatus Subscribe to and receive different types of platform information - currently supports derivatives pair status and liquidation feed. https://docs.bitfinex.com/reference#ws-public-status
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">key</span>
+        string. The value of the key, contained in the subscription payload, determines what status data will be returned. key: “deriv:SYMBOL” // e.g. “deriv:tBTCF0:USTF0” or key: “liq:global” etc
+        </li>
+        <li><span class="parameter">callback</span>
+        function. Callback function for trades channel messages
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsNewOrder"></a>
+    <strong>wsNewOrder (gid, cid, type_, symbol, amount, price, lev, price_trailing, price_aux_limit, price_oco_stop, flags, tif, meta)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsNewOrder Creates a new order, can be used to create margin, exchange, and derivative orders. https://docs.bitfinex.com/reference#ws-auth-input-order-new
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">gid</span>
+        number|table. (optional) Group id for the order or function args in one table, like {gid=GID, cid=CID, …}
+        </li>
+        <li><span class="parameter">cid</span>
+        number. Should be unique in the day (UTC) (not enforced)
+        </li>
+        <li><span class="parameter">type_</span>
+        string. The type of the order: LIMIT, EXCHANGE LIMIT, MARKET, EXCHANGE MARKET, STOP, EXCHANGE STOP, STOP LIMIT, EXCHANGE STOP LIMIT, TRAILING STOP, EXCHANGE TRAILING STOP, FOK, EXCHANGE FOK, IOC, EXCHANGE IOC.
+        </li>
+        <li><span class="parameter">symbol</span>
+        string. symbol (tBTCUSD, tETHUSD, …)
+        </li>
+        <li><span class="parameter">amount</span>
+        int string. Positive for buy, Negative for sell
+        </li>
+        <li><span class="parameter">price</span>
+        int string. Price (Not required for market orders)
+        </li>
+        <li><span class="parameter">lev</span>
+        number. Set the leverage for a derivative order, supported by derivative symbol orders only. The value should be between 1 and 100 inclusive. The field is optional, if omitted the default leverage value of 10 will be used.
+        </li>
+        <li><span class="parameter">price_trailing</span>
+        int string. The trailing price
+        </li>
+        <li><span class="parameter">price_aux_limit</span>
+        int string. Auxiliary Limit price (for STOP LIMIT)
+        </li>
+        <li><span class="parameter">price_oco_stop</span>
+        int string. OCO stop price
+        </li>
+        <li><span class="parameter">flags</span>
+        number int16. See https://docs.bitfinex.com/v2/docs/flag-values.
+        </li>
+        <li><span class="parameter">tif</span>
+        datetime string. Time-In-Force: datetime for automatic order cancellation (ie. 2020–01–01 10:45:23) )
+        </li>
+        <li><span class="parameter">meta</span>
+        table. The meta object allows you to pass along an affiliate code inside the object - example: meta: {aff_code: ‘AFF<em>CODE</em>HERE’}
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsUpdateOrder"></a>
+    <strong>wsUpdateOrder (id, gid, cid, cid_date, amount, price, lev, delta, price_trailing, price_aux_limit, flags, tif)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsUpdateOrder Update an existing order, can be used to update margin, exchange, and derivative orders. https://docs.bitfinex.com/reference#ws-auth-input-order-update
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+        number|table. Order ID or function args in one table, like {id=ORDER_ID,delta=DELTA, …}
+        </li>
+        <li><span class="parameter">gid</span>
+        number|table. Group Order ID
+        </li>
+        <li><span class="parameter">cid</span>
+        number. Client Order ID
+        </li>
+        <li><span class="parameter">cid_date</span>
+        string. Client Order ID Date
+        </li>
+        <li><span class="parameter">amount</span>
+        int string. Positive for buy, Negative for sell
+        </li>
+        <li><span class="parameter">price</span>
+        int string. Price (Not required for market orders)
+        </li>
+        <li><span class="parameter">lev</span>
+        number. Set the leverage for a derivative order, supported by derivative symbol orders only. The value should be between 1 and 100 inclusive. The field is optional, if omitted the default leverage value of 10 will be used.
+        </li>
+        <li><span class="parameter">delta</span>
+        int string. Change of amount
+        </li>
+        <li><span class="parameter">price_trailing</span>
+        int string. The trailing price
+        </li>
+        <li><span class="parameter">price_aux_limit</span>
+        int string. Auxiliary Limit price (for STOP LIMIT)
+        </li>
+        <li><span class="parameter">flags</span>
+        number int16. See https://docs.bitfinex.com/v2/docs/flag-values.
+        </li>
+        <li><span class="parameter">tif</span>
+        datetime string. Time-In-Force: datetime for automatic order cancellation (ie. 2020–01–01 10:45:23) )
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsNewOrderMultiOp"></a>
+    <strong>wsNewOrderMultiOp (op)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsNewOrderMultiOp Send multiple order-related operations. (Max 75 operations per request) https://docs.bitfinex.com/reference#ws-auth-input-order-multi-op
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">op</span>
+        table. the inner array to specify the different operations you would like to perform, starting each separate operation with the appropriate abbreviation followed by an object holding the details.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsCancelOrder"></a>
+    <strong>wsCancelOrder (id, cid, cid_date)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsCancelOrder To cancel an order, construct a payload using the ‘oc’ (order cancel) abbreviation. The order details need to include either the Internal Order ID or the Client Order ID and Client Order ID Date (YYYY-MM-DD format). https://docs.bitfinex.com/reference#ws-auth-input-order-cancel
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+        number. Internal Order ID
+        </li>
+        <li><span class="parameter">cid</span>
+        number. Client Order ID
+        </li>
+        <li><span class="parameter">cid_date</span>
+        string. Client Order ID Date
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsCancelOrderMulti"></a>
+    <strong>wsCancelOrderMulti (payload)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsCancelOrderMulti The Cancel Order Multi command allows sending of multiple order cancellation operations at the same time. To do this, construct a payload with the &#39;oc<em>multi’ (order cancel multi) abbreviation. The payload needs to include an object that specifies which orders to cancel based on Internal Order ID‘s, Client Order ID’s (along with the cid</em>DATE in a YYYY-MM-DD format), Group ID, or the ‘all’ request field. Please look to the sidebar for examples of each method. https://docs.bitfinex.com/reference#ws-auth-input-order-cancel-multi
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">payload</span>
+        table. {‘id’={ID, 1234, …}} or {‘cid’= {{ID, CID_DATE},{234, ‘2016–12–05’},}} or {‘gid’= {GID, 11, …}}
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsNewOffer"></a>
+    <strong>wsNewOffer (type_, symbol, amount, rate, period, flags)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsNewOffer Create a new funding offer. https://docs.bitfinex.com/reference#ws-auth-input-offer-new
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">type_</span>
+        string|table. LIMIT, FRRDELTAVAR, FRRDELTAFIX or key-value table with function args like {type_=‘LIMIT’, symbol=‘fUSD, amount=’-1.234‘, rate=’0.0002’, period=7,flags=0}
+        </li>
+        <li><span class="parameter">symbol</span>
+        string. Symbol (fUSD, fBTC, …)
+        </li>
+        <li><span class="parameter">amount</span>
+        int string. Amount (&gt; 0 for offer, &lt; 0 for bid)
+        </li>
+        <li><span class="parameter">rate</span>
+        int string. Rate (or offset for FRRDELTA offers)
+        </li>
+        <li><span class="parameter">period</span>
+        int. Time period of offer. Minimum 2 days. Maximum 120 days.
+        </li>
+        <li><span class="parameter">flags</span>
+        number. See https://docs.bitfinex.com/v2/docs/flag-values.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsCancelOffer"></a>
+    <strong>wsCancelOffer (id)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsCancelOffer Cancel a funding offer. https://docs.bitfinex.com/reference#ws-auth-input-offer-cancel
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+        number. Offer ID
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "wsCalc"></a>
+    <strong>wsCalc (req)</strong>
+    </dt>
+    <dd>
+    Bitfinex:wsCalc Send calc requests to trigger specific calculations. https://docs.bitfinex.com/reference#ws-auth-input-calc
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">req</span>
+        table. Available Calc Requests: [[‘margin_base’],[‘margin<em>sym</em>tBTCUSD’],[‘funding<em>sym</em>fUSD’],[‘position_tBTCUSD’],[‘wallet<em>margin</em>BTC’],[‘balance’]]
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2022-03-02 00:15:09 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
