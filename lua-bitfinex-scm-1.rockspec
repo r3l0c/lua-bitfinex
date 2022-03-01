@@ -14,7 +14,7 @@ Public REST: full support, WebSocket full support.
 }
 dependencies = {
    "lua >= 5.1",
-   "websocket = scm-1",
+   "websocket",
 }
 build = {
     type = "builtin",
