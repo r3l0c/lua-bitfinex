@@ -174,7 +174,6 @@ end
 
 function Bitfinex:query_post_json(qPath, qParams)
     local u = url.parse((string.find(qPath, 'auth/') and self.API_URL.REST.AUTH or self.API_URL.REST.PUBLIC) .. qPath)
-    print(u)
     local opts = {
         headers = {}
     }
@@ -182,7 +181,6 @@ function Bitfinex:query_post_json(qPath, qParams)
     if string.find(tostring(u), 'v2/auth/') then
         local nonce = tostring(self.utils.gettime())
         local signature = '/api/v2/' .. qPath .. nonce .. json.encode(qParams)
-        print(signature)
         local sig = self:makeSig(signature)
         opts.headers['bfx-nonce'] = nonce
         opts.headers['bfx-apikey'] = self.credentials.apikey
@@ -797,7 +795,6 @@ function Bitfinex:ForeignExchangeRate(ccy1, ccy2)
         ccy1 = ccy1[1],
         ccy2 = ccy1[2]
     }))
-    print(json.encode(ccy1))
     return {
         CURRENT_RATE = calc_raw[1]
     }
@@ -1003,7 +1000,6 @@ end
 function Bitfinex:_schtotbl(str)
     local SCH = {}
     str = str:gsub('[^%w_,]', '')
-    print(str)
     str:gsub('([^,]+)', function(c)
         table.insert(SCH, c)
     end)
@@ -1604,7 +1600,6 @@ function Bitfinex._parsewspub(r, ch)
                     PRICE = r[ai][4]
                 })
             else
-                print(ai)
                 for p, rr in ipairs(r[ai]) do
                     table.insert(o[ai], {
                         ID = rr[1],
@@ -1775,7 +1770,6 @@ end
 
 function Bitfinex:onwspubmsg(msg)
     local m = json.decode(msg.data)
-    -- print(msg.data)
     if (m.event ~= nil) then
         if (m.event == 'info') then
             self.wspub_ready = tonumber(m.platform.status) ~= 0
